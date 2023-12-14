@@ -1,0 +1,1 @@
+Introducing WaterMark Pro, the simple yet powerful app designed to streamline the process of adding watermarks to your collection of pictures. Whether you're a photographer protecting your work or a social media enthusiast looking to brand your images, WaterMark Pro provides a user-friendly solution to enhance your images with personalized watermarks.
