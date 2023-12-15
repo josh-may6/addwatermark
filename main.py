@@ -8,10 +8,8 @@ import numpy as np
 
 root = Tk()
 root.withdraw()
-directory_as_str = filedialog.askdirectory(initialdir='/Users/joshmaitre/Desktop', title='Select an Image:')
+file_as_str = filedialog.askopenfiles(initialdir="/Users/joshmaitre/Desktop", title='Select Image(s)')
 
-
-# print(filename)
 
 def add_watermark(image, wm_text):
     opened_image = Image.open(image)
@@ -36,9 +34,7 @@ def add_watermark(image, wm_text):
     opened_image.save(file_path)
 
 
-directory = os.fsencode(directory_as_str)
-for file in os.listdir(directory):
-    filename = os.fsdecode(file)
-    if filename.endswith('.jpg') or filename.endswith('png'):
-        file_path = f"{directory_as_str}/{filename}"
-        add_watermark(image=file_path, wm_text='@JoshMaitre')
+for file in file_as_str:
+    file_path = file.name
+    add_watermark(file_path, 'HACKED')
+    print(file.name)
