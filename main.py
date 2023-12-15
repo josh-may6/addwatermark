@@ -1,40 +1,35 @@
-import os
-
 from PIL import Image, ImageDraw, ImageFont
-from tkinter import filedialog
-from tkinter import Tk
-import matplotlib.pyplot as plt
-import numpy as np
-
-root = Tk()
-root.withdraw()
-file_as_str = filedialog.askopenfiles(initialdir="/Users/joshmaitre/Desktop", title='Select Image(s)')
+from tkinter import filedialog, Tk
 
 
-def add_watermark(image, wm_text):
-    opened_image = Image.open(image)
+def get_image_files():
+    root = Tk()
+    root.withdraw()
+    files = filedialog.askopenfiles(initialdir="/Users/joshmaitre/Desktop", title='Select Image(s)')
+    return files
 
-    image_width, image_height = opened_image.size
-    draw = ImageDraw.Draw(opened_image)
 
-    font_size = int(image_width / 50)  # Aspect ratio for text size
+def add_watermark(image_path, wm_text='@JoshMaitre'):
+    opened_image = Image.open(image_path)
+    width, height = opened_image.size
 
+    font_size = int(width / 50)
     font = ImageFont.truetype('Arial.ttf', font_size)
 
-    # Coordinates for where we want the image
-    x, y = int(image_width * .90), int(image_height * .95)
+    x, y = int(width * 0.90), int(height * 0.95)
 
-    # Add the watermark
+    draw = ImageDraw.Draw(opened_image)
     draw.text((x, y), wm_text, font=font, fill='#FFF', stroke_width=5, stroke_fill='#222', anchor='ms')
 
-    # Show Image
     opened_image.show()
-
-    # Save Image
-    opened_image.save(file_path)
+    opened_image.save(image_path)
 
 
-for file in file_as_str:
-    file_path = file.name
-    add_watermark(file_path, 'HACKED')
-    print(file.name)
+def main():
+    files = get_image_files()
+    for file in files:
+        add_watermark(file.name)
+
+
+if __name__ == "__main__":
+    main()
